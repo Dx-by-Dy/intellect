@@ -57,21 +57,21 @@ cd ../answers
 
 ## Публикация страницы
 
-Исходник страницы — `../lecture/index.html`. Он написан как фрагмент для артефакта claude.ai, без `<!doctype html>` и `<head>`: эту обёртку добавляет платформа (приватная версия: https://claude.ai/artifact/3SjZfikUWUNfAUwhaAPpDU). Для GitHub Pages скрипт собирает полную копию `../docs/index.html`. Править нужно только `lecture/index.html`, а `docs/` пересобирать скриптом.
+Исходник страницы — `../lecture/index.html`. Он написан как фрагмент для артефакта claude.ai, без `<!doctype html>` и `<head>`: эту обёртку добавляет платформа (приватная версия: https://claude.ai/artifact/3SjZfikUWUNfAUwhaAPpDU). Для GitHub Pages скрипт `../scripts/build_site.py` собирает из него полную страницу `../docs/index.html`. Папка `docs/` в git не хранится (она в `.gitignore`): править нужно только `lecture/index.html`.
 
-Страницу публикует workflow `.github/workflows/pages.yml` в корне репозитория. При push в `main`, который меняет какую-либо папку `docs/`, скрипт `scripts/build_pages.py` собирает сайт: каждая `<путь>/docs/` выкладывается по адресу `https://dx-by-dy.github.io/intellect/<путь>/`, а на https://dx-by-dy.github.io/intellect/ появляется список всех страниц. Для новой лекции достаточно положить её сборку в свою папку `docs/`, workflow менять не нужно. Один раз в настройках репозитория нужно выбрать Settings → Pages → Source: **GitHub Actions**. Бесплатно Pages работает только для публичных репозиториев.
+Страницу публикует workflow `.github/workflows/pages.yml` в корне репозитория. При каждом push в `main` скрипт `scripts/build_pages.py` в корне сначала запускает `scripts/build_site.py` этой лекции, а потом собирает сайт: каждая `<путь>/docs/` выкладывается по адресу `https://dx-by-dy.github.io/intellect/<путь>/`, а на https://dx-by-dy.github.io/intellect/ появляется список всех страниц. Один раз в настройках репозитория нужно выбрать Settings → Pages → Source: **GitHub Actions**. Бесплатно Pages работает только для публичных репозиториев.
 
 Порядок работы (команды из папки `2026/session-4/lecture-1/`):
 
 ```bash
 # 1. править lecture/index.html
-python3 scripts/build_site.py      # 2. lecture/index.html -> docs/index.html
+python3 scripts/build_site.py      # 2. локальная сборка lecture/index.html -> docs/index.html
 node scripts/check_page.mjs        # 3. проверка в headless Chrome, скриншоты в .check/
-git add lecture docs               # 4. коммитить исходник вместе со сборкой
+git add lecture                    # 4. коммитить только исходник, docs/ соберёт workflow
 git commit -m "..."
 git push                           # 5. через минуту страница обновится, ход сборки во вкладке Actions
 ```
 
-Если изменения не трогают `docs/` (задачи, решения, эта папка), деплой не запускается. Перезапустить его вручную можно во вкладке Actions → Deploy Pages → Run workflow.
+Шаги 2 и 3 нужны только для проверки перед push: на сайт попадает сборка, которую делает workflow. Если `build_site.py` упадёт в CI, страница при этом деплое не опубликуется, а в Actions → Deploy Pages появится ошибка. Перезапустить деплой вручную можно там же: Run workflow.
 
 `check_page.mjs` нужен Node 22+ и Chrome: путь передаётся аргументом или через `$CHROME`, иначе берётся из `~/.cache/puppeteer`. Скрипт прокликивает все демонстрации, проверяет отсутствие ошибок JS и горизонтальной прокрутки и снимает скриншоты: компьютер, тёмная тема, телефон.
