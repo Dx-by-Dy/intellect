@@ -3,9 +3,9 @@
 # Ошибка в этом файле не ломает деплой: сайт соберётся с подписями по умолчанию,
 # а в Actions появится предупреждение.
 
-title = "Занятия по информатике"
+title = "Алгоритмы с структуры данных"
 eyebrow = "intellect"
-lead = "Интерактивные лекции, задачи и разборы. Выберите смену и занятие."
+lead = "Интерактивные лекции, задачи и разборы."
 footer = "Исходники и материалы на GitHub"
 footer_url = "https://github.com/Dx-by-Dy/intellect"
 
@@ -23,7 +23,7 @@ description = "Структуры данных изнутри: язык C, па�
 [[groups."2026/session-3".links]]
 label = "GitHub"
 title = "Структуры данных изнутри"
-description = "Лекции, задачи и подключение к учебной машине."
+description = "Лекции, задачи."
 url = "https://github.com/Dx-by-Dy/data-structures-inside"
 
 [groups."2026/session-4"]
