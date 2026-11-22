@@ -1,0 +1,4 @@
+# Changes to the shared Pages deploy need the repository owner's review.
+# Enforced only with branch protection on main: "Require review from Code Owners".
+/.github/  @Dx-by-Dy
+/scripts/  @Dx-by-Dy
