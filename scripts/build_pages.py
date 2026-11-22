@@ -3,8 +3,8 @@
 
 Each folder <path>/docs/ that contains index.html is a page. Its files are
 copied to <out>/<path>/, so the page is served at
-https://<owner>.github.io/<repo>/<path>/. A root index.html listing all pages
-is generated as well.
+https://<owner>.github.io/<repo>/<path>/. The root index.html lists all pages
+grouped by year and session; its texts come from site.toml (scripts/site_index.py).
 
 One bad page must not take the whole site down, so problems are reported and
 the page is skipped instead of aborting:
@@ -27,6 +27,8 @@ import re
 import shutil
 import sys
 from pathlib import Path
+
+from site_index import render_index
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_LIMIT = 1024**3  # GitHub Pages rejects sites over 1 GB
@@ -74,7 +76,8 @@ def page_files(rel: Path) -> list[Path]:
     return files
 
 
-def page_title(index: Path) -> str:
+def page_meta(index: Path) -> tuple[str, str]:
+    """Return the page's <title> and <meta name="description">."""
     data = index.read_bytes()
     try:
         text = data.decode("utf-8")
@@ -82,7 +85,10 @@ def page_title(index: Path) -> str:
         report("warning", "index.html is not valid UTF-8; the page is published, but text may look garbled", index)
         text = data.decode("utf-8", errors="replace")
     m = re.search(r"<title>(.*?)</title>", text, re.S | re.I)
-    return html.unescape(m.group(1).strip()) if m else ""
+    title = html.unescape(m.group(1).strip()) if m else ""
+    m = re.search(r"""<meta\s+name=["']description["']\s+content=["'](.*?)["']""", text, re.S | re.I)
+    desc = html.unescape(m.group(1).strip()) if m else ""
+    return title, desc
 
 
 def check_links(rel: Path, files: list[Path]) -> None:
@@ -143,28 +149,17 @@ def main() -> int:
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
-    items = []
+    pages = []
     for rel, files in published:
         docs = ROOT / rel / "docs"
         for f in files:
             (out / rel / f).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(docs / f, out / rel / f)
         check_links(rel, files)
-        title = page_title(docs / "index.html")
-        path = rel.as_posix()
-        label = html.escape(f"{path} — {title}" if title else path)
-        href = html.escape("/".join(map(lambda s: s.replace("%", "%25").replace("#", "%23").replace("?", "%3F"), rel.parts)))
-        items.append((path, f'<li><a href="{href}/">{label}</a></li>'))
-        print(f"page: {path}/ ({len(files)} files)")
+        pages.append((rel, *page_meta(docs / "index.html")))
+        print(f"page: {rel.as_posix()}/ ({len(files)} files)")
 
-    (out / "index.html").write_text(
-        "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n"
-        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-        "<title>intellect</title>\n"
-        "<style>body{font:16px/1.6 system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem}</style>\n"
-        "</head>\n<body>\n<h1>intellect</h1>\n<ul>\n" + "\n".join(li for _, li in sorted(items)) + "\n</ul>\n</body>\n</html>\n",
-        encoding="utf-8",
-    )
+    (out / "index.html").write_text(render_index(pages, ROOT / "site.toml", report), encoding="utf-8")
     print(f"wrote {out} ({len(published)} pages, {total / 1024**2:.1f} MB)")
     return 0
 
