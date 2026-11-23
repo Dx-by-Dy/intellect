@@ -32,7 +32,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python3 scripts/build_pages.py _site
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.0"
+      - run: uv run --locked --python 3.12 python scripts/build_pages.py _site
+      - name: Check graph lessons in the Pages artifact
+        run: |
+          test -s _site/2026/session-4/lecture-1/index.html
+          test -s _site/2026/session-4/lecture-2/index.html
+          test -s _site/2026/session-4/lecture-2/javascripts/demos.js
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

@@ -33,3 +33,6 @@ description = "Графы и алгоритмы на них."
 # description — из <meta name="description">, label — из [labels].
 [pages."2026/session-4/lecture-1"]
 description = "Как хранить граф в памяти, обход в глубину и в ширину. Интерактивные демонстрации и задачи по уровням."
+
+[pages."2026/session-4/lecture-2"]
+title = "Взвешенные графы и алгоритм Дейкстры"

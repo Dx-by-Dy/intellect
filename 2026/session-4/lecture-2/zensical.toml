@@ -1,0 +1,61 @@
+[project]
+site_name = "Графы"
+site_description = "Ориентированные и взвешенные графы, кратчайшие пути, пошаговый алгоритм Дейкстры и две реализации на C++17."
+site_url = "https://dx-by-dy.github.io/intellect/2026/session-4/lecture-2/"
+docs_dir = "content"
+site_dir = "docs"
+extra_javascript = [{ path = "javascripts/demos.js", type = "module" }]
+extra_css = ["stylesheets/demos.css"]
+nav = [
+  "index.md",
+  { "Задачи для практики" = [
+    "problems/index.md",
+    "tasks/ticket.md",
+    "tasks/courier.md",
+    "tasks/deduplicate.md",
+    "tasks/one-transfer.md",
+    "tasks/one-step.md",
+    "tasks/acmp-132.md",
+    "tasks/acmp-1381.md",
+    "tasks/cses-1671.md",
+    "tasks/fixation-order.md",
+    "tasks/time-transfers.md",
+    "tasks/acmp-133.md",
+    "tasks/to-station.md",
+    "tasks/paid-maze.md",
+    "tasks/pickup.md",
+    "tasks/nearest-help.md",
+    "tasks/budget-transfers.md",
+    "tasks/cses-1195.md",
+    "tasks/cses-1202.md",
+    "tasks/cses-1196.md",
+  ] },
+]
+
+[project.theme]
+language = "ru"
+features = ["content.code.copy", "navigation.top", "navigation.indexes"]
+font.text = "Golos Text"
+font.code = "JetBrains Mono"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Включить тёмную тему"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Включить светлую тему"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+tables = {}
+toc.permalink = true
+pymdownx.details = {}
+pymdownx.highlight = {}
+pymdownx.snippets.check_paths = true
+pymdownx.superfences = {}
