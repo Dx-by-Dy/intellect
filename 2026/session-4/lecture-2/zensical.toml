@@ -6,10 +6,35 @@ docs_dir = "content"
 site_dir = "docs"
 extra_javascript = [{ path = "javascripts/demos.js", type = "module" }]
 extra_css = ["stylesheets/demos.css"]
+nav = [
+  "index.md",
+  { "Задачи для практики" = [
+    "problems/index.md",
+    "tasks/ticket.md",
+    "tasks/courier.md",
+    "tasks/deduplicate.md",
+    "tasks/one-transfer.md",
+    "tasks/one-step.md",
+    "tasks/acmp-132.md",
+    "tasks/acmp-1381.md",
+    "tasks/cses-1671.md",
+    "tasks/fixation-order.md",
+    "tasks/time-transfers.md",
+    "tasks/acmp-133.md",
+    "tasks/to-station.md",
+    "tasks/paid-maze.md",
+    "tasks/pickup.md",
+    "tasks/nearest-help.md",
+    "tasks/budget-transfers.md",
+    "tasks/cses-1195.md",
+    "tasks/cses-1202.md",
+    "tasks/cses-1196.md",
+  ] },
+]
 
 [project.theme]
 language = "ru"
-features = ["content.code.copy", "navigation.top"]
+features = ["content.code.copy", "navigation.top", "navigation.indexes"]
 font.text = "Golos Text"
 font.code = "JetBrains Mono"
 
