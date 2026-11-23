@@ -1,0 +1,271 @@
+.lecture-demo {
+  --demo-ink: var(--md-default-fg-color);
+  --demo-muted: var(--md-default-fg-color--light);
+  --demo-line: var(--md-default-fg-color--lightest);
+  --demo-surface: var(--md-default-bg-color);
+  --demo-edge: #808b9c;
+  --demo-blue: #2c56c9;
+  --demo-orange: #b34521;
+  --demo-amber: #aa7612;
+  --demo-amber-soft: color-mix(in srgb, #e0a21a 16%, var(--demo-surface));
+  --demo-orange-soft: color-mix(in srgb, var(--demo-orange) 14%, var(--demo-surface));
+  --demo-on-fill: #fff;
+  container-type: inline-size;
+  margin-block: 1em;
+}
+
+[data-md-color-scheme="slate"] .lecture-demo {
+  --demo-edge: #8491a8;
+  --demo-blue: #9ab2ff;
+  --demo-orange: #ff986d;
+  --demo-amber: #f2c04f;
+  --demo-on-fill: #171b23;
+}
+
+.lecture-demo .demo-controls,
+.lecture-demo .demo-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem;
+}
+
+.lecture-demo button {
+  padding: .24em .65em;
+  border: 1px solid var(--demo-line);
+  border-radius: .35em;
+  background: var(--demo-surface);
+  color: var(--demo-ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.lecture-demo button[aria-pressed="true"],
+.lecture-demo .demo-primary {
+  border-color: var(--demo-blue);
+  background: var(--demo-blue);
+  color: var(--demo-on-fill);
+}
+
+.lecture-demo button[aria-disabled="true"] {
+  border-color: var(--demo-line);
+  background: var(--md-code-bg-color);
+  color: var(--demo-muted);
+  cursor: default;
+}
+
+.lecture-demo :focus-visible,
+.lecture-demo:focus-visible {
+  outline: 2px solid var(--demo-blue);
+  outline-offset: 2px;
+}
+
+.lecture-demo .demo-count,
+.lecture-demo .demo-panel-title,
+.lecture-demo .demo-legend,
+.lecture-demo .demo-hint {
+  color: var(--demo-muted);
+  font-size: .72rem;
+}
+
+.lecture-demo .demo-count {
+  font-variant-numeric: tabular-nums;
+  margin-inline-start: auto;
+}
+
+.lecture-demo .demo-panel {
+  min-width: 0;
+  padding: .65rem;
+  border: 1px solid var(--demo-line);
+  border-radius: .5rem;
+  background: var(--demo-surface);
+}
+
+.lecture-demo .demo-panel-title { font-weight: 600; }
+
+.lecture-demo .demo-board,
+.lecture-demo .demo-side {
+  display: grid;
+  align-items: start;
+  gap: .65rem;
+}
+
+@container (min-width: 33rem) {
+  .lecture-demo .demo-board { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+}
+
+.lecture-demo .demo-message {
+  min-height: 3em;
+  margin: .5rem 0;
+  padding: .4rem .65rem;
+  border-radius: .4rem;
+  background: var(--demo-amber-soft);
+}
+
+.lecture-demo.demo-panel .demo-message { min-height: 0; margin-bottom: 0; }
+.lecture-demo .demo-hint { margin-bottom: 0; }
+.lecture-demo .demo-legend span { display: inline-flex; align-items: center; gap: .25rem; }
+
+.lecture-demo .dot {
+  width: .65rem;
+  height: .65rem;
+  border: 2px solid var(--demo-ink);
+  border-radius: 50%;
+}
+
+.lecture-demo .dot.open { background: var(--demo-amber-soft); border-color: var(--demo-amber); }
+.lecture-demo .dot.current { background: var(--demo-orange); border-color: var(--demo-orange); }
+.lecture-demo .dot.done { background: var(--demo-blue); border-color: var(--demo-blue); }
+.lecture-demo .line-key { width: .85rem; border-top: 3px dashed var(--demo-orange); }
+.lecture-demo .line-key.path { border-top: 4px solid var(--demo-blue); }
+
+.lecture-demo .demo-state {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: var(--md-code-font-family), monospace;
+  font-size: .65rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.lecture-demo .demo-state th,
+.lecture-demo .demo-state td {
+  padding: 4px 1px;
+  border-bottom: 1px solid var(--demo-line);
+}
+
+.lecture-demo .demo-state tbody th { text-align: left; }
+.lecture-demo .demo-state .current { background: var(--demo-orange-soft); }
+.lecture-demo .demo-state .changed { background: var(--demo-amber-soft); }
+.lecture-demo .demo-relaxations ul { margin-block: .25em 0; }
+.lecture-demo .demo-relaxations strong { color: var(--demo-blue); }
+
+.lecture-demo .graph { display: block; width: 100%; height: 312px; }
+.lecture-demo .graph.compact { height: 178px; }
+.lecture-demo .graph text {
+  font-family: var(--md-code-font-family), monospace;
+  dominant-baseline: central;
+  text-anchor: middle;
+}
+
+.lecture-demo .graph .edge { stroke: var(--demo-edge); stroke-width: 2; }
+.lecture-demo .graph .edge.active { stroke: var(--demo-orange); stroke-width: 3; stroke-dasharray: 6 3; }
+.lecture-demo .graph .edge.path { stroke: var(--demo-blue); stroke-width: 4; }
+.lecture-demo .graph .arrow { fill: var(--demo-edge); }
+.lecture-demo .graph .arrow.active { fill: var(--demo-orange); }
+.lecture-demo .graph .arrow.path { fill: var(--demo-blue); }
+.lecture-demo .graph .weight {
+  fill: var(--demo-ink);
+  stroke: var(--demo-surface);
+  stroke-width: 6px;
+  paint-order: stroke;
+  font-size: 14px;
+}
+
+.lecture-demo .graph .vertex circle { fill: var(--demo-surface); stroke: var(--demo-ink); stroke-width: 2; }
+.lecture-demo .graph .vertex text { fill: var(--demo-ink); font-weight: 600; font-size: 15px; }
+.lecture-demo .graph .vertex .estimate { font-weight: 400; font-size: 12px; }
+.lecture-demo .graph .vertex.open circle { fill: var(--demo-amber-soft); stroke: var(--demo-amber); }
+.lecture-demo .graph .vertex.done circle { fill: var(--demo-blue); stroke: var(--demo-blue); }
+.lecture-demo .graph .vertex.current circle { fill: var(--demo-orange); stroke: var(--demo-orange); }
+.lecture-demo .graph .vertex.current text,
+.lecture-demo .graph .vertex.done text { fill: var(--demo-on-fill); }
+
+.lecture-demo.heap-demo {
+  padding: .65rem;
+  border: 1px solid var(--demo-line);
+  border-radius: .5rem;
+}
+
+.heap-demo .heap-input {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+
+.heap-demo .heap-input input {
+  width: 5em;
+  padding: .24em .45em;
+  border: 1px solid var(--demo-line);
+  border-radius: .35em;
+  color: var(--demo-ink);
+  background: var(--demo-surface);
+  font: inherit;
+}
+
+.heap-demo .heap-input input[aria-invalid="true"] { border-color: var(--demo-orange); }
+.heap-demo .heap-limit,
+.heap-demo .heap-error { margin: .3rem 0; }
+.heap-demo .heap-error { color: var(--demo-orange); }
+.heap-demo .heap-steps { margin-top: .65rem; }
+
+.heap-demo .heap-tree {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  margin: .35rem auto;
+}
+
+.heap-demo .heap-edge { stroke: var(--demo-edge); stroke-width: 1.5; }
+.heap-demo .heap-edge.compare { stroke: var(--demo-orange); stroke-width: 2.5; stroke-dasharray: 4 2; }
+.heap-demo .heap-edge.change { stroke: var(--demo-blue); stroke-width: 2.5; }
+.heap-demo .heap-node circle { fill: var(--demo-surface); stroke: var(--demo-edge); stroke-width: 1.5; }
+.heap-demo .heap-node.compare circle { fill: var(--demo-orange-soft); stroke: var(--demo-orange); stroke-dasharray: 3 2; }
+.heap-demo .heap-node.change circle { fill: var(--demo-blue); stroke: var(--demo-blue); }
+.heap-demo .heap-node text {
+  fill: var(--demo-ink);
+  font-family: var(--md-code-font-family), monospace;
+  dominant-baseline: central;
+  text-anchor: middle;
+}
+.heap-demo .heap-node.change text { fill: var(--demo-on-fill); }
+
+.heap-demo .heap-array:not([hidden]) {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  margin: .3rem 0 0;
+  padding: 0 0 .15rem;
+  list-style: none;
+  font-family: var(--md-code-font-family), monospace;
+  white-space: nowrap;
+  scrollbar-width: thin;
+}
+
+.heap-demo .heap-array::before { content: "["; }
+.heap-demo .heap-array::after { content: "]"; }
+
+.heap-demo .heap-array:not([hidden]) > li {
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin: 0;
+}
+
+.heap-demo .heap-array > li:not(:last-child)::after {
+  content: ",";
+  margin-inline-end: .32em;
+}
+
+.heap-demo .heap-array strong {
+  padding-inline: .1em;
+  border: 1px solid transparent;
+  border-radius: .25em;
+  font-weight: 400;
+}
+
+.heap-demo .heap-array .compare strong {
+  border-color: var(--demo-orange);
+  border-style: dashed;
+  background: var(--demo-orange-soft);
+}
+
+.heap-demo .heap-array .change strong {
+  border-color: var(--demo-blue);
+  color: var(--demo-on-fill);
+  background: var(--demo-blue);
+}
+
+.heap-demo .heap-empty { margin: .25rem 0 0; color: var(--demo-muted); }
+.heap-demo [hidden] { display: none; }
