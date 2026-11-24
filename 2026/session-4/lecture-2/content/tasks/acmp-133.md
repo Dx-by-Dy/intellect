@@ -1,6 +1,6 @@
 # Заправки
 
-[Все задачи](../problems/index.md) · [Оригинал и отправка решения (ACMP 133)](https://acmp.ru/index.asp?main=task&id_task=133)
+[Все задачи](../problems/index.md) · [Оригинал и отправка решения (ACMP 133)](https://acmp.ru/index.asp?main=task&id_task=133){: target="_blank" rel="noopener" }
 
 Лимит времени — 1 с, память — 16 МБ.
 
