@@ -1,6 +1,6 @@
 # Расписание без дублей
 
-[Все задачи](../problems/index.md)
+[Все задачи](../problems/index.md) · [Яндекс Контест · C](https://new.contest.yandex.ru/contests/104356/problems?id=7822306%2F2026_11_24%2FynnnEfQZVr){: target="_blank" rel="noopener" }
 
 Ввод и вывод через стандартные потоки. Лимит времени — 1 с.
 
