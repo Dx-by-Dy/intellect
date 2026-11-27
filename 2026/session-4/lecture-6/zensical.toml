@@ -1,0 +1,72 @@
+[project]
+site_name = "Деревья и алгоритмы на них"
+site_description = "Обход дерева, поддеревья, диаметр, динамика, LCA и двоичные подъёмы. Примеры на C++17."
+site_url = "https://dx-by-dy.github.io/intellect/2026/session-4/lecture-6/"
+docs_dir = "content"
+site_dir = "docs"
+extra_javascript = [{ path = "javascripts/demos.js", type = "module" }]
+extra_css = ["stylesheets/demos.css"]
+nav = [
+  "index.md",
+  "advanced.md",
+  { "Задачи для практики" = [
+    "problems/index.md",
+    { "Уровень 1" = [
+      "tasks/leetcode-1791.md",
+      "tasks/leetcode-589.md",
+      "tasks/leetcode-429.md",
+      "tasks/inf-3771.md",
+      "tasks/acmp-141.md",
+    ] },
+    { "Уровень 2" = [
+      "tasks/cses-1674.md",
+      "tasks/cses-1131.md",
+      "tasks/cses-1687.md",
+      "tasks/cses-1135.md",
+      "tasks/cses-1133.md",
+      "tasks/leetcode-337.md",
+    ] },
+    { "Уровень 3" = [
+      "tasks/leetcode-1443.md",
+      "tasks/cf-1675d.md",
+      "tasks/cses-1132.md",
+      "tasks/cses-2079.md",
+      "tasks/cses-1137.md",
+      "tasks/cf-1249f.md",
+    ] },
+    { "Уровень 4" = [
+      "tasks/cses-1136.md",
+      "tasks/cses-2134.md",
+      "tasks/cf-342e.md",
+      "tasks/cses-2080.md",
+    ] },
+  ] },
+]
+
+[project.theme]
+language = "ru"
+features = ["content.code.copy", "navigation.top", "navigation.indexes"]
+font.text = "Golos Text"
+font.code = "JetBrains Mono"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Включить тёмную тему"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Включить светлую тему"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+tables = {}
+toc.permalink = true
+pymdownx.details = {}
+pymdownx.highlight = {}
+pymdownx.snippets.check_paths = true
+pymdownx.superfences = {}
