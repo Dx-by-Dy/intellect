@@ -7,6 +7,7 @@
 | 2026 | 3 | Структуры данных изнутри (C) | [`2026/session-3/`](2026/session-3/) | отдельный репозиторий |
 | 2026 | 4 | Графы: хранение в памяти, DFS и BFS | [`2026/session-4/lecture-1/`](2026/session-4/lecture-1/) | https://dx-by-dy.github.io/intellect/2026/session-4/lecture-1/ |
 | 2026 | 4 | Взвешенные графы и алгоритм Дейкстры | [`content/index.md`](2026/session-4/lecture-2/content/index.md) | https://dx-by-dy.github.io/intellect/2026/session-4/lecture-2/ |
+| 2026 | 4 | Деревья и алгоритмы на них | [`content/index.md`](2026/session-4/lecture-6/content/index.md) | [Конспект](https://dx-by-dy.github.io/intellect/2026/session-4/lecture-6/) |
 
 Все опубликованные страницы: https://dx-by-dy.github.io/intellect/
 
